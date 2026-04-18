@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "StudentInnovation.Shared/1.0.0": {
+        "runtime": {
+          "StudentInnovation.Shared.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "StudentInnovation.Shared/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

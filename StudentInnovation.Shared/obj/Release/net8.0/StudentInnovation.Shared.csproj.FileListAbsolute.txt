@@ -1,0 +1,11 @@
+c:\Users\siaed\Desktop\demo\StudentInnovationSystem\StudentInnovation.Shared\bin\Release\net8.0\StudentInnovation.Shared.deps.json
+c:\Users\siaed\Desktop\demo\StudentInnovationSystem\StudentInnovation.Shared\bin\Release\net8.0\StudentInnovation.Shared.dll
+c:\Users\siaed\Desktop\demo\StudentInnovationSystem\StudentInnovation.Shared\bin\Release\net8.0\StudentInnovation.Shared.pdb
+c:\Users\siaed\Desktop\demo\StudentInnovationSystem\StudentInnovation.Shared\obj\Release\net8.0\StudentInnovation.Shared.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\siaed\Desktop\demo\StudentInnovationSystem\StudentInnovation.Shared\obj\Release\net8.0\StudentInnovation.Shared.AssemblyInfoInputs.cache
+c:\Users\siaed\Desktop\demo\StudentInnovationSystem\StudentInnovation.Shared\obj\Release\net8.0\StudentInnovation.Shared.AssemblyInfo.cs
+c:\Users\siaed\Desktop\demo\StudentInnovationSystem\StudentInnovation.Shared\obj\Release\net8.0\StudentInnovation.Shared.csproj.CoreCompileInputs.cache
+c:\Users\siaed\Desktop\demo\StudentInnovationSystem\StudentInnovation.Shared\obj\Release\net8.0\StudentInnovation.Shared.dll
+c:\Users\siaed\Desktop\demo\StudentInnovationSystem\StudentInnovation.Shared\obj\Release\net8.0\refint\StudentInnovation.Shared.dll
+c:\Users\siaed\Desktop\demo\StudentInnovationSystem\StudentInnovation.Shared\obj\Release\net8.0\StudentInnovation.Shared.pdb
+c:\Users\siaed\Desktop\demo\StudentInnovationSystem\StudentInnovation.Shared\obj\Release\net8.0\ref\StudentInnovation.Shared.dll

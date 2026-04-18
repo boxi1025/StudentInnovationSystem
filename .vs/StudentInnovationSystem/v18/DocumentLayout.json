@@ -1,0 +1,82 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\siaed\\Desktop\\demo\\StudentInnovationSystem\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E4A915A9-F302-4F7C-A74F-8B8057900A96}|StudentInnovation.WpfApp\\StudentInnovation.WpfApp.csproj|c:\\users\\siaed\\desktop\\demo\\studentinnovationsystem\\studentinnovation.wpfapp\\views\\changepassworddialog.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{E4A915A9-F302-4F7C-A74F-8B8057900A96}|StudentInnovation.WpfApp\\StudentInnovation.WpfApp.csproj|solutionrelative:studentinnovation.wpfapp\\views\\changepassworddialog.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4A915A9-F302-4F7C-A74F-8B8057900A96}|StudentInnovation.WpfApp\\StudentInnovation.WpfApp.csproj|c:\\users\\siaed\\desktop\\demo\\studentinnovationsystem\\studentinnovation.wpfapp\\views\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{E4A915A9-F302-4F7C-A74F-8B8057900A96}|StudentInnovation.WpfApp\\StudentInnovation.WpfApp.csproj|solutionrelative:studentinnovation.wpfapp\\views\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4A915A9-F302-4F7C-A74F-8B8057900A96}|StudentInnovation.WpfApp\\StudentInnovation.WpfApp.csproj|c:\\users\\siaed\\desktop\\demo\\studentinnovationsystem\\studentinnovation.wpfapp\\views\\userdialog.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{E4A915A9-F302-4F7C-A74F-8B8057900A96}|StudentInnovation.WpfApp\\StudentInnovation.WpfApp.csproj|solutionrelative:studentinnovation.wpfapp\\views\\userdialog.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4A915A9-F302-4F7C-A74F-8B8057900A96}|StudentInnovation.WpfApp\\StudentInnovation.WpfApp.csproj|c:\\users\\siaed\\desktop\\demo\\studentinnovationsystem\\studentinnovation.wpfapp\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4A915A9-F302-4F7C-A74F-8B8057900A96}|StudentInnovation.WpfApp\\StudentInnovation.WpfApp.csproj|solutionrelative:studentinnovation.wpfapp\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ChangePasswordDialog.xaml",
+              "DocumentMoniker": "C:\\Users\\siaed\\Desktop\\demo\\StudentInnovationSystem\\StudentInnovation.WpfApp\\Views\\ChangePasswordDialog.xaml",
+              "RelativeDocumentMoniker": "StudentInnovation.WpfApp\\Views\\ChangePasswordDialog.xaml",
+              "ToolTip": "C:\\Users\\siaed\\Desktop\\demo\\StudentInnovationSystem\\StudentInnovation.WpfApp\\Views\\ChangePasswordDialog.xaml",
+              "RelativeToolTip": "StudentInnovation.WpfApp\\Views\\ChangePasswordDialog.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-03-25T14:40:48.511Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UserDialog.xaml",
+              "DocumentMoniker": "C:\\Users\\siaed\\Desktop\\demo\\StudentInnovationSystem\\StudentInnovation.WpfApp\\Views\\UserDialog.xaml",
+              "RelativeDocumentMoniker": "StudentInnovation.WpfApp\\Views\\UserDialog.xaml",
+              "ToolTip": "C:\\Users\\siaed\\Desktop\\demo\\StudentInnovationSystem\\StudentInnovation.WpfApp\\Views\\UserDialog.xaml",
+              "RelativeToolTip": "StudentInnovation.WpfApp\\Views\\UserDialog.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-03-25T14:39:03.428Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\siaed\\Desktop\\demo\\StudentInnovationSystem\\StudentInnovation.WpfApp\\Views\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "StudentInnovation.WpfApp\\Views\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\siaed\\Desktop\\demo\\StudentInnovationSystem\\StudentInnovation.WpfApp\\Views\\MainWindow.xaml",
+              "RelativeToolTip": "StudentInnovation.WpfApp\\Views\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-03-25T14:02:49.792Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\siaed\\Desktop\\demo\\StudentInnovationSystem\\StudentInnovation.WpfApp\\ViewModels\\MainViewModel.cs",
+              "RelativeDocumentMoniker": "StudentInnovation.WpfApp\\ViewModels\\MainViewModel.cs",
+              "ToolTip": "C:\\Users\\siaed\\Desktop\\demo\\StudentInnovationSystem\\StudentInnovation.WpfApp\\ViewModels\\MainViewModel.cs",
+              "RelativeToolTip": "StudentInnovation.WpfApp\\ViewModels\\MainViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-25T12:07:11.297Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

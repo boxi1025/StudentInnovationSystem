@@ -1,0 +1,452 @@
+<Window x:Class="StudentInnovation.WpfApp.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:oxy="http://oxyplot.org/wpf"
+        xmlns:converters="clr-namespace:StudentInnovation.WpfApp.Converters"
+        Title="{Binding WindowChromeTitle}" Height="820" Width="1280" WindowStartupLocation="CenterScreen"
+        Background="{StaticResource PageBackgroundBrush}"
+        Loaded="Window_Loaded">
+    <Window.Resources>
+        <DataTemplate x:Key="ResearchTemplate">
+            <StackPanel>
+                <TextBlock Text="项目编号由系统在提交后自动生成" FontStyle="Italic" Foreground="{StaticResource SoftTextBrush}"/>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="CompetitionTemplate">
+            <StackPanel><TextBlock Text="获奖等级"/><TextBox Text="{Binding AwardLevel, UpdateSourceTrigger=PropertyChanged}" /></StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="PatentTemplate">
+            <StackPanel><TextBlock Text="专利号"/><TextBox Text="{Binding PatentNo, UpdateSourceTrigger=PropertyChanged}" /></StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="PaperTemplate">
+            <StackPanel><TextBlock Text="期刊名称"/><TextBox Text="{Binding Journal, UpdateSourceTrigger=PropertyChanged}" /></StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="StartupTemplate">
+            <StackPanel><TextBlock Text="公司/项目名称"/><TextBox Text="{Binding StartupName, UpdateSourceTrigger=PropertyChanged}" /></StackPanel>
+        </DataTemplate>
+        <converters:AchievementFormTemplateSelector x:Key="FormSelector"
+                                                    ResearchTemplate="{StaticResource ResearchTemplate}"
+                                                    CompetitionTemplate="{StaticResource CompetitionTemplate}"
+                                                    PatentTemplate="{StaticResource PatentTemplate}"
+                                                    PaperTemplate="{StaticResource PaperTemplate}"
+                                                    StartupTemplate="{StaticResource StartupTemplate}" />
+    </Window.Resources>
+
+    <DockPanel Margin="12" Background="{StaticResource PageBackgroundBrush}">
+        <Border DockPanel.Dock="Top" Style="{StaticResource CardBorderStyle}" Margin="0,0,0,12">
+            <DockPanel>
+                <TextBlock FontSize="20" FontWeight="Bold" DockPanel.Dock="Left" Foreground="{StaticResource AccentTextBrush}">
+                    <Run Text="学生创新成果管理系统"/><Run Text="   |   "/><Run Text="{Binding CurrentUser}"/>
+                </TextBlock>
+                <Button DockPanel.Dock="Right" Content="退出登录" Command="{Binding LogoutCommand}" Padding="10,3"
+                        Style="{StaticResource SecondaryButtonStyle}"/>
+            </DockPanel>
+        </Border>
+
+        <TabControl>
+            <TabItem Header="成果全生命周期管理">
+                <Grid Margin="6">
+                    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="{Binding FormColumnWidth}"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource CardBorderStyle}" Margin="0,0,0,8">
+                        <WrapPanel Margin="0">
+                            <StackPanel Width="270" Margin="0,0,18,0">
+                                <TextBlock Text="关键词（自动刷新）" />
+                                <TextBox Text="{Binding FilterKeyword, UpdateSourceTrigger=PropertyChanged}" />
+                            </StackPanel>
+                            <StackPanel Width="150" Margin="0,0,18,0">
+                                <TextBlock Text="学院"/>
+                                <TextBox Text="{Binding FilterDepartment, UpdateSourceTrigger=PropertyChanged}" />
+                            </StackPanel>
+                            <StackPanel Width="120" Margin="0,0,18,0">
+                                <TextBlock Text="级别"/>
+                                <TextBox Text="{Binding FilterLevel, UpdateSourceTrigger=PropertyChanged}" />
+                            </StackPanel>
+                            <StackPanel Width="120">
+                                <TextBlock Text="类别"/>
+                                <TextBox Text="{Binding FilterCategory, UpdateSourceTrigger=PropertyChanged}" />
+                            </StackPanel>
+
+                            <Button Content="添加项目"
+                                    Style="{StaticResource PrimaryButtonStyle}"
+                                    Command="{Binding AddProjectCommand}"
+                                    Margin="10,0,0,0"
+                                    VerticalAlignment="Center"
+                                    Visibility="{Binding AddButtonVisibility}"/>
+
+                            <TextBlock Text="{Binding StatisticsText}" Margin="18,0,0,0" VerticalAlignment="Center" Foreground="{StaticResource SoftTextBrush}"/>
+                        </WrapPanel>
+                    </Border>
+
+                    <DataGrid Grid.Row="1" Grid.Column="0" Margin="0,0,10,0" ItemsSource="{Binding Achievements}" SelectedItem="{Binding SelectedAchievement}" AutoGenerateColumns="False" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="45"/>
+                            <DataGridTextColumn Header="成果名称" Binding="{Binding Title}" Width="150"/>
+                            <DataGridTextColumn Header="类别" Binding="{Binding Category}" Width="90"/>
+                            <DataGridTextColumn Header="级别" Binding="{Binding Level}" Width="70"/>
+                            <DataGridTextColumn Header="年度" Binding="{Binding Year}" Width="60"/>
+                            <DataGridTextColumn Header="学院" Binding="{Binding Department}" Width="90"/>
+                            <DataGridTextColumn Header="学生" Binding="{Binding StudentName}" Width="80"/>
+                            <DataGridTextColumn Header="状态" Binding="{Binding Status}" Width="90"/>
+                            <DataGridTextColumn Header="创新学分" Binding="{Binding CreditScore}" Width="80"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Border Grid.Row="1" Grid.Column="1" x:Name="FormPanel" Width="520"
+                            Style="{StaticResource CardBorderStyle}"
+                            Opacity="0" IsHitTestVisible="False"
+                            RenderTransformOrigin="0,0">
+                        <Border.RenderTransform>
+                            <TranslateTransform x:Name="FormPanelTransform" X="520"/>
+                        </Border.RenderTransform>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0" Margin="0,0,0,8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0"
+                                           Text="统一申报表单"
+                                           FontSize="16"
+                                           FontWeight="SemiBold"
+                                           VerticalAlignment="Center"
+                                           Foreground="{StaticResource AccentTextBrush}" />
+                                <Button Grid.Column="1"
+                                        Content="×"
+                                        Width="30"
+                                        Height="30"
+                                        Padding="0"
+                                        FontSize="16"
+                                        FontWeight="Bold"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Top"
+                                        Style="{StaticResource SecondaryButtonStyle}"
+                                        Command="{Binding ClearCommand}" />
+                            </Grid>
+                            <ScrollViewer Grid.Row="1">
+                                <StackPanel IsEnabled="{Binding IsCurrentFormEditable}">
+                                <Border Visibility="{Binding RejectedHintVisibility}"
+                                        Background="#FFF6D8"
+                                        BorderBrush="#E6C869"
+                                        BorderThickness="1"
+                                        CornerRadius="8"
+                                        Padding="8"
+                                        Margin="0,0,0,10">
+                                    <TextBlock Text="该成果已被驳回，请修改内容后重新提交。"
+                                               Foreground="#7A5B00"
+                                               FontWeight="SemiBold"/>
+                                </Border>
+                                <TextBlock Text="成果名称"/><TextBox Text="{Binding Title}" Margin="0,2,0,8"/>
+                            <TextBlock Text="成果类型"/>
+                            <ComboBox SelectedValue="{Binding Category}" SelectedValuePath="Content" Margin="0,2,0,8">
+                                <ComboBoxItem Content="科研项目"/><ComboBoxItem Content="竞赛作品"/><ComboBoxItem Content="专利"/><ComboBoxItem Content="论文"/><ComboBoxItem Content="创业计划"/>
+                            </ComboBox>
+                            <ContentControl Content="{Binding Category}" ContentTemplateSelector="{StaticResource FormSelector}" Margin="0,0,0,8"/>
+                            <TextBlock Text="成果级别"/><ComboBox SelectedValue="{Binding Level}" SelectedValuePath="Content" Margin="0,2,0,8"><ComboBoxItem Content="国家级"/><ComboBoxItem Content="省部级"/><ComboBoxItem Content="校级"/></ComboBox>
+                            <TextBlock Text="所属学院"/><TextBox Text="{Binding Department}" Margin="0,2,0,8"/>
+                            <TextBlock Text="年度"/><TextBox Text="{Binding Year}" Margin="0,2,0,8"/>
+                            <TextBlock Text="团队名称"/><TextBox Text="{Binding TeamName}" Margin="0,2,0,8"/>
+                            <TextBlock Text="学生姓名"/><TextBox Text="{Binding StudentName}" Margin="0,2,0,8" IsReadOnly="{Binding IsStudent}"/>
+                            <TextBlock Text="学号"/><TextBox Text="{Binding StudentId}" Margin="0,2,0,8" IsReadOnly="{Binding IsStudent}"/>
+                            <TextBlock Text="指导老师"/><TextBox Text="{Binding Advisor}" Margin="0,2,0,8"/>
+                            <TextBlock Text="完成日期"/><DatePicker SelectedDate="{Binding AchievedOn}" Margin="0,2,0,8"/>
+                            <TextBlock Text="创新学分" ToolTip="范围 0~100，步长 0.5"/>
+                            <ComboBox ItemsSource="{Binding CreditScoreOptions}"
+                                      SelectedItem="{Binding SelectedCreditScore}"
+                                      ItemStringFormat="{}{0:0.#}"
+                                      Margin="0,2,0,8"
+                                      MinWidth="120"/>
+                                <TextBlock Text="成果说明"/><TextBox Text="{Binding Description}" Height="70" TextWrapping="Wrap" AcceptsReturn="True" Margin="0,2,0,10"/>
+                                <StackPanel Visibility="{Binding RejectReasonVisibility}">
+                                    <TextBlock Text="驳回理由" Foreground="Tomato" FontWeight="SemiBold"/>
+                                    <TextBox Text="{Binding RejectReason}" IsReadOnly="True" Height="60" TextWrapping="Wrap" Margin="0,2,0,10"/>
+                                </StackPanel>
+
+                                <TextBlock Text="已上传图片" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,8" />
+                                <ItemsControl ItemsSource="{Binding ImageAttachments}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border BorderBrush="{StaticResource PrimaryGreenBorderBrush}" BorderThickness="1" CornerRadius="10" Margin="0,0,10,10" Padding="6">
+                                                <StackPanel>
+                                                    <Grid>
+                                                        <Image Source="{Binding FileUrl}" Height="110" Width="160" Stretch="UniformToFill" />
+                                                        <Button Content="×"
+                                                                Width="26" Height="26"
+                                                                Background="White"
+                                                                BorderBrush="{StaticResource PrimaryGreenBorderBrush}"
+                                                                BorderThickness="1"
+                                                                Foreground="{StaticResource AccentTextBrush}"
+                                                                FontWeight="Bold"
+                                                                HorizontalAlignment="Right"
+                                                                VerticalAlignment="Top"
+                                                                Padding="0"
+                                                                Command="{Binding DataContext.DeleteAttachmentCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                                CommandParameter="{Binding}"/>
+                                                    </Grid>
+                                                    <TextBlock Text="{Binding FileName}" TextWrapping="Wrap" MaxWidth="160" FontSize="11" Foreground="{StaticResource SoftTextBrush}" Margin="0,6,0,0"/>
+                                                </StackPanel>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+
+                                <WrapPanel>
+                                    <Button Content="保存"
+                                            Style="{StaticResource PrimaryButtonStyle}"
+                                            Margin="0,0,10,0"
+                                            Command="{Binding AddCommand}"
+                                            Visibility="{Binding AddButtonVisibility}"/>
+                                    <Button Content="更新"
+                                            Style="{StaticResource SecondaryButtonStyle}"
+                                            Margin="0,0,10,0"
+                                            Command="{Binding UpdateCommand}"
+                                            Visibility="{Binding UpdateButtonVisibility}"/>
+                                    <Button Content="删除"
+                                            Style="{StaticResource SecondaryButtonStyle}"
+                                            Margin="0,0,10,0"
+                                            Command="{Binding DeleteCommand}"
+                                            Visibility="{Binding DeleteButtonVisibility}"/>
+                                    <Button Content="提交"
+                                            Style="{StaticResource PrimaryButtonStyle}"
+                                            Margin="0,0,10,0"
+                                            Command="{Binding SubmitCommand}"
+                                            Visibility="{Binding SubmitButtonVisibility}"/>
+                                    <Button Content="教师通过" Margin="0,0,10,0" Command="{Binding TeacherApproveCommand}">
+                                        <Button.Style>
+                                            <Style TargetType="Button" BasedOn="{StaticResource SecondaryButtonStyle}">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding CanTeacherApprove}" Value="True">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+
+                                    <Button Content="终审通过" Margin="0,0,10,0" Command="{Binding SchoolApproveCommand}">
+                                        <Button.Style>
+                                            <Style TargetType="Button" BasedOn="{StaticResource SecondaryButtonStyle}">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding CanSchoolApprove}" Value="True">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+
+                                    <Button Content="驳回" Margin="0,0,10,0" Command="{Binding RejectCommand}">
+                                        <Button.Style>
+                                            <Style TargetType="Button" BasedOn="{StaticResource SecondaryButtonStyle}">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding CanReview}" Value="True">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                    <Button Content="上传图片"
+                                            Style="{StaticResource SecondaryButtonStyle}"
+                                            Margin="0,0,10,0"
+                                            Command="{Binding UploadAttachmentCommand}"
+                                            Visibility="{Binding UploadButtonVisibility}"/>
+                                </WrapPanel>
+                                </StackPanel>
+                            </ScrollViewer>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="数字荣誉墙">
+                <Grid Margin="8">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock TextWrapping="Wrap" FontWeight="SemiBold" Margin="0,0,0,6"
+                               Text="统计口径：数据库中状态为「已通过」的成果（全校汇总，与左侧列表筛选无关）。图表与下方明细在每次加载/刷新成果列表时同步更新。"/>
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                        <StackPanel>
+                            <Border Style="{StaticResource CardBorderStyle}" Padding="12" Margin="0,0,0,10">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="16" FontWeight="SemiBold" Foreground="{StaticResource AccentTextBrush}"
+                                               Text="{Binding HonorWallTotalApproved, StringFormat=已通过成果总数：{0}}"/>
+                                    <TextBlock FontSize="16" FontWeight="SemiBold" Margin="32,0,0,0" Foreground="{StaticResource AccentTextBrush}"
+                                               Text="{Binding HonorWallCurrentYearApproved, StringFormat=本年度（已通过）：{0}}"/>
+                                </StackPanel>
+                            </Border>
+                            <Grid Margin="0,0,0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="280"/>
+                                    <RowDefinition Height="280"/>
+                                </Grid.RowDefinitions>
+                                <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource CardBorderStyle}" Padding="6" Margin="0,0,6,6">
+                                    <oxy:PlotView Model="{Binding HonorDepartmentPieModel}" MinHeight="260"/>
+                                </Border>
+                                <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource CardBorderStyle}" Padding="6" Margin="6,0,0,6">
+                                    <oxy:PlotView Model="{Binding HonorCategoryPieModel}" MinHeight="260"/>
+                                </Border>
+                                <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource CardBorderStyle}" Padding="6" Margin="0,6,6,0">
+                                    <oxy:PlotView Model="{Binding HonorLevelBarModel}" MinHeight="260"/>
+                                </Border>
+                                <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource CardBorderStyle}" Padding="6" Margin="6,6,0,0">
+                                    <oxy:PlotView Model="{Binding HonorYearBarModel}" MinHeight="260"/>
+                                </Border>
+                            </Grid>
+                            <TextBlock Text="分项汇总明细（学院 | 级别 · 类型）" FontWeight="SemiBold" Margin="0,4,0,6" Foreground="{StaticResource AccentTextBrush}"/>
+                            <ListBox ItemsSource="{Binding HonorWallItems}" MinHeight="120" MaxHeight="220"
+                                     BorderThickness="1" BorderBrush="{StaticResource PrimaryGreenBorderBrush}"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="成果广场（虚拟展厅）">
+                <Grid Margin="8">
+                    <TextBlock Text="优秀作品展示（示意）: 图片集 / 视频演示 / 创业计划书" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                    <ListBox Margin="0,28,0,0" ItemsSource="{Binding GalleryItems}" />
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="{Binding AccountManagementHeader}">
+                <Grid Margin="8">
+                    <Grid.Resources>
+                        <Style TargetType="Grid" x:Key="AdminGridStyle">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsAdmin}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                        <Style TargetType="Grid" x:Key="UserGridStyle">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsAdmin}" Value="False">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Resources>
+
+                    <!-- 管理员账户管理界面 -->
+                    <Grid Style="{StaticResource AdminGridStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="账户管理" FontWeight="SemiBold" Margin="0,0,0,8"/>
+
+                        <DataGrid Grid.Row="1" ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}" AutoGenerateColumns="False" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="用户名" Binding="{Binding Username}" Width="100"/>
+                                <DataGridTextColumn Header="姓名" Binding="{Binding FullName}" Width="80"/>
+                                <DataGridTextColumn Header="角色" Binding="{Binding Role}" Width="70"/>
+                                <DataGridTextColumn Header="学院" Binding="{Binding Department}" Width="100"/>
+                                <DataGridTextColumn Header="学号/工号" Binding="{Binding StudentNo, StringFormat='{}{0}'}" Width="100"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <WrapPanel Grid.Row="2" Margin="0,8,0,0">
+                            <Button Content="添加教师账户" Command="{Binding AddTeacherCommand}" Margin="0,0,6,0"/>
+                            <Button Content="添加学生账户" Command="{Binding AddStudentCommand}" Margin="0,0,6,0"/>
+                            <Button Content="修改账户" Command="{Binding UpdateUserCommand}" Margin="0,0,6,0"/>
+                            <Button Content="删除账户" Command="{Binding DeleteUserCommand}" Margin="0,0,6,0"/>
+                        </WrapPanel>
+                    </Grid>
+
+                    <!-- 教师/学生个人信息界面 -->
+                    <Grid Style="{StaticResource UserGridStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.Resources>
+                            <Style x:Key="HideWhenStudent" TargetType="FrameworkElement">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsStudent}" Value="True">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+
+                            <Style x:Key="ShowWhenStudent" TargetType="FrameworkElement">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsStudent}" Value="True">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Resources>
+
+                        <TextBlock Text="个人信息" FontWeight="SemiBold" Grid.ColumnSpan="2" Margin="0,0,0,8"/>
+
+                        <TextBlock Text="姓名:" Grid.Row="1" Margin="0,2"/>
+                        <TextBox Text="{Binding CurrentUserFullName}" Grid.Row="1" Grid.Column="1" Margin="6,2,0,2"/>
+
+                        <TextBlock Text="学院:" Grid.Row="2" Margin="0,2"/>
+                        <TextBox Text="{Binding CurrentUserDepartment}" Grid.Row="2" Grid.Column="1" Margin="6,2,0,2"/>
+
+                        <TextBlock Text="{Binding CurrentUserRoleIdLabel}" Grid.Row="3" Margin="0,2"/>
+                        <TextBox Text="{Binding CurrentUserRoleId}" Grid.Row="3" Grid.Column="1" Margin="6,2,0,2" IsReadOnly="True"/>
+
+                        <TextBlock Text="密码:" Grid.Row="4" Margin="0,2" Style="{StaticResource HideWhenStudent}"/>
+                        <TextBox Grid.Row="4" Grid.Column="1" Margin="6,2,0,2" Style="{StaticResource HideWhenStudent}"/>
+
+                        <TextBlock Text="确认密码:" Grid.Row="5" Margin="0,2" Style="{StaticResource HideWhenStudent}"/>
+                        <TextBox Grid.Row="5" Grid.Column="1" Margin="6,2,0,2" Style="{StaticResource HideWhenStudent}"/>
+
+                        <TextBlock Text="成果个数:" Grid.Row="6" Margin="0,2" Style="{StaticResource ShowWhenStudent}"/>
+                        <TextBox Text="{Binding AchievementsCount}" Grid.Row="6" Grid.Column="1" Margin="6,2,0,2" IsReadOnly="True"
+                                 Style="{StaticResource ShowWhenStudent}"/>
+
+                        <Button Content="修改密码" Grid.Row="7" Grid.ColumnSpan="2" HorizontalAlignment="Right"
+                                Command="{Binding ChangePasswordCommand}" Margin="0,12,0,0"
+                                Style="{StaticResource ShowWhenStudent}"/>
+
+                        <Button Content="更新信息" Grid.Row="7" Grid.ColumnSpan="2" HorizontalAlignment="Right"
+                                Command="{Binding UpdatePersonalInfoCommand}" Margin="0,12,0,0"
+                                Style="{StaticResource HideWhenStudent}"/>
+                    </Grid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>

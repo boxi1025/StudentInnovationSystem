@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dotnet build:*)",
+      "Bash(sc query:*)",
+      "Bash(curl -v http://localhost:5197/api/achievement)",
+      "Bash(curl -v -H \"Content-Type: application/json\" -d \"{\"\"username\"\":\"\"admin\"\",\"\"password\"\":\"\"123456\"\"}\" http://localhost:5197/api/login)",
+      "Bash(curl -v -H \"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidW5pcXVlX25hbWUiOiJhZG1pbiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhZG1pbiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxNzc0NDQyODUxLCJpc3MiOiJTdHVkZW50SW5ub3ZhdGlvblN5c3RlbSIsImF1ZCI6IlN0dWRlbnRJbm5vdmF0aW9uQ2xpZW50In0.Dg1COtcSLyrx9iUbcjEF90eTxvfu4_CZu6ziPQeYKu8\" http://localhost:5197/api/achievement)",
+      "Bash(mysql -u root -p123456 -e \"SHOW DATABASES;\")",
+      "Bash(netstat -ano)"
+    ]
+  }
+}

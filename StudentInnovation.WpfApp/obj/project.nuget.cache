@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "3iFmuf24vZI=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\siaed\\Desktop\\demo\\StudentInnovationSystem\\StudentInnovation.WpfApp\\StudentInnovation.WpfApp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\siaed\\.nuget\\packages\\oxyplot.core\\2.2.0\\oxyplot.core.2.2.0.nupkg.sha512",
+    "C:\\Users\\siaed\\.nuget\\packages\\oxyplot.wpf\\2.2.0\\oxyplot.wpf.2.2.0.nupkg.sha512",
+    "C:\\Users\\siaed\\.nuget\\packages\\oxyplot.wpf.shared\\2.2.0\\oxyplot.wpf.shared.2.2.0.nupkg.sha512"
+  ],
+  "logs": []
+}
